@@ -115,3 +115,11 @@ server.use(router)
 server.listen(8000, () => {
   console.log('ouvindo na porta 8000...')
 })
+
+process.on('uncaughtException', function(err) {
+  if(err.errno === 'EADDRINUSE')
+    console.log('Atenção! Para rodar a Fake API, é esperado que a porta 8000 esteja livre para uso, mas ela já está sendo utilizada .');
+  else
+    console.log(err);
+  process.exit(1);
+}); 
